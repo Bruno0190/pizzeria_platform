@@ -5,15 +5,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.*;
 import org.springframework.beans.factory.annotation.*;
 import java.util.*;
-
-
-
 import org.progetti.java.spring.pizzeria_platform.model.Pizza;
 import org.progetti.java.spring.pizzeria_platform.repository.PizzaRepository;
 import jakarta.validation.*;
 import org.springframework.validation.*;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+
 
 
 @Controller
@@ -23,10 +19,27 @@ public class PizzaController {
     @Autowired PizzaRepository pizzaRepository;
 
     @GetMapping("/")
-    public String indexPizza(Model model) {
-        List<Pizza> pizzas = pizzaRepository.findAll();
-        // Ogni Pizza nella lista è stata creata usando i setter
-        model.addAttribute("pizzas", pizzas);
+    public String indexPizza(@RequestParam(required = false) String name, Model model) {
+        Boolean noResults = false;
+        List<Pizza> listaPizza = pizzaRepository.findAll();
+        List<String> listaPizzaNames = listaPizza.stream()
+                                        .map(pizza -> pizza.getName())
+                                        .toList();
+        //Se il nome è presente nella lista dei nomi delle pizze, mostra i risultati filtrati
+        if(name != null && !name.trim().isEmpty() && listaPizzaNames.contains(name)){
+            List<Pizza> pizzas = pizzaRepository.findByNameContainingIgnoreCase(name);
+            model.addAttribute("pizzas", pizzas);
+        // Altrimenti, se il nome non è vuoto ma non è presente nella lista, mostra il messaggio di nessun risultato
+        } else if(name!= null && !name.trim().isEmpty() && !listaPizzaNames.contains(name)){
+            noResults = true;
+            model.addAttribute("noResults", noResults);
+            model.addAttribute("message", "Nessuna pizza corrispondente questo nome");
+        // Altrimenti mostra tutte le pizze di default
+        } else {
+            List<Pizza> pizzas = pizzaRepository.findAll();
+            // Ogni Pizza nella lista è stata creata usando i setter
+            model.addAttribute("pizzas", pizzas);    
+        }
         return "pizzas/index";
     }
 
