@@ -8,49 +8,50 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
 <body>
-    <header class="container mt-5">
-        <h1 class="mb-4">Welcome to the Pizzeria Platform</h1>
+    <header class="container-fluid mt-5 p-0">
+        <h1 class="mb-4 text-center" style="font-family: 'Comic Sans MS', sans-serif; font-size: 70px;">Welcome to the Pizzeria Platform</h1>
     </header>
 
-    <div class="container-fluid d-flex align-items-center flex-column">
+    <main>
+        <div class="container">
 
-        <div class="row justify-content-around">
+            <div class="row justify-content-between align-items-center g-4">
 
-            <div class="card" style="width: 18rem;">
-            <img src="/images/stuzzichi collage.png" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">APPETIZERS</h5>
-                    <p class="card-text">Fancy a croquette? Or some fries? Here you go!</p>
-                    <a href="/src/main/resources/templates/pizzas/index.html" class="btn btn-primary">GO</a>
+                <div class="col-lg-3">
+                    <div class="card border border-4 border-warning text-center px-3" >
+                        <img src="/images/stuzzichi collage.png" class="card-img-top border mt-2 border-3 border-warning-subtle object-fit-fill border rounded" style="height: 300px;" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">APPETIZERS</h5>
+                            <p class="card-text">Fancy a croquette? Or some fries? Here you go!</p>
+                            <a href="/src/main/resources/templates/pizzas/index.html" class="btn btn-primary">GO</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card border border-4 border-danger text-center px-3" style="min-height: 600px;" >
+                        <img src="/images/pizza collage.png" class="card-img-top border mt-2 border-3 border-danger-subtle object-fit-fill border rounded" style="height: 400px;" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">PIZZA</h5>
+                            <p class="card-text">Choose your pizza or create a new one just for ya!</p>
+                            <a href="/src/main/resources/templates/pizzas/index.html" class="btn btn-primary">GO</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="card border border-4 border-primary text-center px-3" >
+                        <img src="/images/drink collage.png" class="card-img-top border mt-2 border-3 border-primary-subtle object-fit-fill border rounded" style="height: 300px;" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">DRINKS</h5>
+                            <p class="card-text">Quench your thirst with something tasty!</p>
+                            <a href="/src/main/resources/templates/pizzas/index.html" class="btn btn-primary">GO</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <div class="card col-2.col" style="width: 18rem;">
-                <img src="/images/pizza collage.png" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">PIZZA</h5>
-                    <p class="card-text">Choose your pizza or create a new one just for ya!</p>
-                    <a href="/src/main/resources/templates/pizzas/index.html" class="btn btn-primary">GO</a>
-                </div>
-            </div>
-
-            <div class="card" style="width: 18rem;">
-            <img src="/images/drink collage.png" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">DRINKS</h5>
-                    <p class="card-text">Quench your thirst with something tasty!</p>
-                    <a href="/src/main/resources/templates/pizzas/index.html" class="btn btn-primary">GO</a>
-                </div>
-            </div>
-
+    
         </div>
+
+    </main>
    
-
-    
-
-    </div>
-
-
-    
 </body>
 </html>
