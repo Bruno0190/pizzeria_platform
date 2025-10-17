@@ -2,6 +2,7 @@ package org.progetti.java.spring.pizzeria_platform.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.ui.*;
 import org.springframework.beans.factory.annotation.*;
 import java.util.*;
@@ -9,6 +10,7 @@ import org.progetti.java.spring.pizzeria_platform.model.Pizza;
 import org.progetti.java.spring.pizzeria_platform.repository.PizzaRepository;
 import jakarta.validation.*;
 import org.springframework.validation.*;
+import org.progetti.java.spring.pizzeria_platform.service.FileStorage;
 
 
 
@@ -17,6 +19,7 @@ import org.springframework.validation.*;
 public class PizzaController {
 
     @Autowired PizzaRepository pizzaRepository;
+    @Autowired FileStorage fileStorage;  
 
     @GetMapping("/")
     public String indexPizza(@RequestParam(required = false) String name, Model model) {
@@ -58,12 +61,15 @@ public class PizzaController {
     }
 
     @PostMapping("/create")
-    public String storePizza(@Valid @ModelAttribute("pizza") Pizza pizza, BindingResult result, Model model) {
+    public String storePizza(@Valid @ModelAttribute("pizza") Pizza pizza, @RequestParam("imageFile") MultipartFile file, BindingResult result, Model model) {
 
         if (result.hasErrors()) {
             model.addAttribute("pizza", pizza);
             return "pizzas/create";
         }
+
+        String imageUrl = fileStorage.storeFile(file);  
+        pizza.setImageUrl(imageUrl);
 
         pizzaRepository.save(pizza);
         return "redirect:/pizzas/";
