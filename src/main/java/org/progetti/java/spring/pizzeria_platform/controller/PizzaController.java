@@ -36,7 +36,7 @@ public class PizzaController {
         } else if(name!= null && !name.trim().isEmpty() && !listaPizzaNames.contains(name)){
             noResults = true;
             model.addAttribute("noResults", noResults);
-            model.addAttribute("message", "Nessuna pizza corrispondente questo nome");
+            model.addAttribute("message", "Sorry, pizza not found");
         // Altrimenti mostra tutte le pizze di default
         } else {
             List<Pizza> pizzas = pizzaRepository.findAll();
@@ -60,6 +60,7 @@ public class PizzaController {
         return "pizzas/create";
     }
 
+    //Questo metodo è delicato. Nell'argomento riceve sia l'oggetto Pizza (con i suoi campi) che il file immagine caricato dall'utente.In RequestParam quel imageFile corrisponde al name dell'input type="file" nel form HTML.
     @PostMapping("/create")
     public String storePizza(@Valid @ModelAttribute("pizza") Pizza pizza, @RequestParam("imageFile") MultipartFile file, BindingResult result, Model model) {
 
