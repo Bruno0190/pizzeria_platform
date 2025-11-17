@@ -16,7 +16,7 @@
     </header> 
 
     <main>
-        <form th:action="@/{pizzas/edit/{id}(id=${pizza.id})}" method="post" enctype="multipart/form-data" th:object="${pizza}">
+        <form th:action="@{/pizzas/edit/{id}(id=${pizza.id})}" method="post" enctype="multipart/form-data" th:object="${pizza}">
             
             <div class="row">
 
