@@ -17,6 +17,8 @@
 
     <main>
         <form th:action="@{/pizzas/edit/{id}(id=${pizza.id})}" method="post" enctype="multipart/form-data" th:object="${pizza}">
+            <!-- Senza questo input il form tenterà di salvare una nuova pizza e non aggiornarla -->
+            <input type="hidden" th:field="*{id}">
             
             <div class="row">
 
