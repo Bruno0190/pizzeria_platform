@@ -21,7 +21,7 @@ public class PizzaController {
     @Autowired PizzaRepository pizzaRepository;
     @Autowired FileStorage fileStorage;  
 
-    @GetMapping("/")
+    @GetMapping("")
     public String indexPizza(@RequestParam(required = false) String name, Model model) {
         Boolean noResults = false;
         List<Pizza> listaPizza = pizzaRepository.findAll();
@@ -73,7 +73,7 @@ public class PizzaController {
         pizza.setImageUrl(imageUrl);
 
         pizzaRepository.save(pizza);
-        return "redirect:/pizzas/";
+        return "redirect:/pizzas";
     }
 
     @GetMapping("/edit/{id}")
@@ -90,13 +90,13 @@ public class PizzaController {
             return "pizzas/edit";
         }
         pizzaRepository.save(pizza);
-        return "redirect:/pizzas/";
+        return "redirect:/pizzas";
     }
 
     @PostMapping("/delete/{id}")
     public String deletePizza(@PathVariable("id") Long id) {
         pizzaRepository.deleteById(id);
-        return "redirect:/pizzas/";
+        return "redirect:/pizzas";
     }
     
         

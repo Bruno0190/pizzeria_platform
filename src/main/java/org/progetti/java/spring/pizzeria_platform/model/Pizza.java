@@ -18,7 +18,7 @@ public class Pizza {
     @Size(min = 5, max = 20, message = "Name must be between 5 and 20 characters")  
     private String name;
     @Column(unique = true, length = 50)
-    @Size(max = 50, message = "Description must be up to 50 characters")
+    @Size(max = 255, message = "Description must be up to 255 characters")
     private String description;
     @Column(nullable = false)
     @NotNull(message = "Price is required")

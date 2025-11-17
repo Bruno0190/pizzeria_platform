@@ -18,19 +18,24 @@
     <main>
         <div class="container">
             <div class="row">
-                <div class="col-4" th:object="${pizza}">            
-                    <div class="card text-bg-dark">
-                        <img th:src="${*.imageUrl}" class="card-img" alt="...">
+                <div class="col-4">            
+                    <div class="card text-bg-dark" >
+                        <img th:src="${pizza.imageUrl}" class="card-img" alt="..." style="height: 250px; object-fit: cover;">
                         <div class="card-img-overlay">
-                            <h3 class="card-title" th:text="${*.name}"></h3>
+                            <h3 class="card-title" th:text="${pizza.name}"></h3>
+                            <p th:text="${pizza.imageUrl}"></p>
+
                         </div>
                     </div>
                 </div>
                 <div class="col-8" th:object="${pizza}">
-                    <p th:text="${*.description}"></p>
-                    <p th:text="|Price: $ + ${*.price}|"></p>
-                    <a href="#" class="btn btn-primary">Order Now</a>         
+                    <p th:text="${pizza.description}"></p>
+                    <p th:text="|Price: ${pizza.price} $|"></p>
+                    <a href="#" class="btn btn-primary">Order Now</a>  
+                    <a th:href="@{/pizzas/edit/{id}(id=${pizza.id})}" class="btn btn-info">Edit</a>     
                 </div>
+
+                    
             </div>   
         </div>
     </main> 

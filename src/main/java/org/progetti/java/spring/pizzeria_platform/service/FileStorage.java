@@ -19,7 +19,7 @@ public class FileStorage {
         if(file.isEmpty()) {
             return null;
         } else {
-            String directoryPath = "C:/Users/black/Desktop/Boolean/esercizi/pizzeria_platform/src/main/resources/static/images/";
+            String directoryPath = "C:/Users/black/Desktop/Boolean/esercizi/pizzeria_platform/src/main/resources/static/images/uploaded/";
             //getOriginalFilename() restituisce il nome originale del file caricato, inclusa l'estensione.
             String filePath = directoryPath + file.getOriginalFilename();
             try {
@@ -33,7 +33,7 @@ public class FileStorage {
 
         }
 
-        return "/images/" + file.getOriginalFilename();  // ← URL per il browser
+        return "/images/uploaded/" + file.getOriginalFilename();  // ← URL per il browser
        
     }
 

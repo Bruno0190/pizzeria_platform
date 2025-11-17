@@ -23,7 +23,11 @@
                 <div class="col-12">
                     <form th:action="@{/pizzas}" method="get">
                         <input type="text" name="name" class="form-control" placeholder="Search Pizzas" th:value="${param.name}">
+
                         <button type="submit" class="btn btn-primary mt-2">Search</button>
+                        <a class="btn btn-info mt-2" th:href="@{/pizzas/create}">Create a new Pizza</a>
+
+
                     </form>
                 </div>
 
@@ -39,16 +43,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="pizza : ${pizzas}" th:object="${pizza}">
-                                <th scope="row" th:text="${*.id}"></th>
-                                <td th:text="${*.name}"></td>
-                                <td th:text="${*.description}"></td>
-                                <td th:text="${*.price}"></td>
+                            <tr th:each="pizza : ${pizzas}">
+                                <th scope="row" th:text="${pizza.id}"></th>
+                                <td th:text="${pizza.name}"></td>
+                                <td th:text="${pizza.description}"></td>
+                                <td th:text="${pizza.price}"></td>
                                 <td>
-                                    <a th:href="@{/pizzas/{id}(id=${*.id})}" class="btn btn-warning btn-sm">Show</a>
-                                    <a th:href="@{/pizzas/edit/{id}(id=${*.id})}" class="btn btn-info btn-sm">Edit</a>
+                                    <a th:href="@{/pizzas/{id}(id=${pizza.id})}" class="btn btn-warning btn-sm">Show</a>
+                                    <a th:href="@{/pizzas/edit/{id}(id=${pizza.id})}" class="btn btn-info btn-sm">Edit</a>
                                     <!-- Per il delete, usiamo un form con metodo POST perchè tutti gli anchor tag sono sempre con metodo GET -->
-                                    <form th:action="@{/pizzas/delete/{id}(id=${*.id})}" method="post" style="display:inline;">
+                                    <form th:action="@{/pizzas/delete/{id}(id=${pizza.id})}" method="post" style="display:inline;">
                                         <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('You sure?')">Delete</button>
                                     </form>
                                 </td>
