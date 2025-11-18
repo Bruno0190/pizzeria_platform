@@ -83,12 +83,24 @@ public class PizzaController {
     }
 
     @PostMapping("/edit/{id}")
-    public String updatePizza(@Valid @ModelAttribute("pizza") Pizza pizza, BindingResult result, Model model) {
+    public String updatePizza(@PathVariable("id") Long id, @Valid @ModelAttribute("pizza") Pizza formPizza, @RequestParam("imageFile") MultipartFile file,BindingResult result, Model model) {
 
         if(result.hasErrors()){
-            model.addAttribute("pizza", pizza);
-            return "pizzas/edit";
+            return "/pizzas/edit";
         }
+        
+        Pizza pizza = pizzaRepository.findById(id).orElseThrow();
+
+        pizza.setName(formPizza.getName());
+        pizza.setDescription(formPizza.getDescription());
+        pizza.setPrice(formPizza.getPrice());
+
+        if (!file.isEmpty()){
+            String imageUrl = fileStorage.storeFile(file);  
+            pizza.setImageUrl(imageUrl);
+        }
+
+
         pizzaRepository.save(pizza);
         return "redirect:/pizzas";
     }

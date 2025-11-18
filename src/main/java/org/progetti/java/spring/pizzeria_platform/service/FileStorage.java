@@ -26,7 +26,8 @@ public class FileStorage {
                 //Files è una classe di utilità in java.nio.file che fornisce metodi statici per operazioni sui file e sulle directory.
                 //getInputStream() restituisce un InputStream per leggere il contenuto del file caricato.
                 //Paths è una classe di utilità che fornisce metodi per creare oggetti Path da stringhe di percorso.
-                Files.copy(file.getInputStream(), Paths.get(filePath));
+                //StandardCopyOption è un Enum, cioè una classe speciale che rappresenta un gruppo di costanti. Il gruppo di costanti in questo caso sono ATOMIC_MOVE, COPY_ATTRIBUTES e REPLACE_EXISTING. Quest'ultimo consente di sovrascrivere il file.
+                Files.copy(file.getInputStream(), Paths.get(filePath), StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException e) {
                 return null; // o gestire l'errore
             }
